@@ -13,7 +13,7 @@ jobs:
           dotnet-version: "10.0.x"
 
       - name: Run Tests
-        run: dotnet test music.Tests
+        run: dotnet test Music.Tests
 
       - name: Login to Azure Container Registry
         uses: docker/login-action@v3
