@@ -1,7 +1,7 @@
 name: hello-world
 on: push
 jobs:
-  my-jobs:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -30,3 +30,16 @@ jobs:
 
       - name: Push Docker Image
         run: docker push brights2026.azurecr.io/laxmi/music-api:${{ env.IMAGE_TAG }}
+
+      - name: Azure Login
+        uses: azure/login@v3
+        with:
+          creds: ${{ secrets.DEPLOYMENT_CREDENTIALS }}
+      
+      - name: Azure CLI script
+        uses: azure/cli@v2
+        with:
+          azcliversion: latest
+          inclineScript: |
+            az account show
+        
